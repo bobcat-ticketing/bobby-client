@@ -14,7 +14,7 @@ setup(
         'Programming Language :: Python :: 3 :: Only'
     ],
     url='https://github.com/kirei/bobtest/',
-    packages=['bobcat_test'],
+    packages=['bob_test'],
     install_requires=[
         'green',
         'pyjwkest',
