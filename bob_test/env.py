@@ -2,8 +2,10 @@
 
 import os
 import json
+import uuid
 import logging
 from typing import Dict, Tuple
+from datetime import datetime, timezone
 from ruamel import yaml
 import requests
 
@@ -32,6 +34,7 @@ class TestEnvironment(object):
         else:
             self.metadata = None
 
+        self.macros = self.config.get('macros', {})
         self.httpconfig = self.config.get('http')
         self.authconfig = self.config.get('authentication')
         self.entity_id = self.authconfig.get('entity_id')
@@ -91,6 +94,19 @@ class TestEnvironment(object):
         if filename is not None:
             return self.base_dir + '/' + filename
         return None
+
+    def update_dict_macros(self, data: dict) -> dict:
+        """Update dict values using macros"""
+        for key, val in data.items():
+            if not isinstance(val, str):
+                continue
+            if val in self.config['macros']:
+                data[key] = self.macros[val]
+            elif val == 'UUID':
+                data[key] = str(uuid.uuid4())
+            elif val == 'TIMESTAMP':
+                data[key] = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        return data
 
     @classmethod
     def create_from_config_file(cls, filename: str = DEFAULT_CONF):
