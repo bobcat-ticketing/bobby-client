@@ -3,12 +3,16 @@
 import unittest
 import logging
 import uuid
+import json
+import time
+from jwkest import b64d
 from bob_test.env import TestEnvironment
 
 
 BAD_ENTITY_ID = str(uuid.uuid4())
 BAD_CERT = 'badcert.pem'
-
+TOKEN_ALGS = ('ES256', 'RS256')
+TIMESKEW = 300
 
 class TestAuthenticationAPI(unittest.TestCase):
 
@@ -22,7 +26,27 @@ class TestAuthenticationAPI(unittest.TestCase):
     def test_get_token(self):
         """Get BoB auth token (good)"""
         response = self.env.get_auth_response()
+        now = int(time.time())
         self.assertEqual(response.status_code, 200)
+        data = response.json()
+        (header, payload, signature) = data['jwtCompact'].split('.')
+        header_dict = json.loads(b64d(header.encode()))
+        payload_dict = json.loads(b64d(payload.encode()))
+        signature_dict = b64d(signature.encode())
+
+        self.assertIn(header_dict['alg'], TOKEN_ALGS)
+        self.assertIsNotNone(header_dict.get('kid'))
+        self.assertIsNotNone(payload_dict.get('iss'))
+        self.assertIsNotNone(payload_dict.get('sub'))
+        self.assertIsNotNone(payload_dict.get('bobAuthZ'))
+        self.assertIsNotNone(payload_dict.get('exp'))
+
+        if 'iat' in payload_dict:
+            self.assertTrue(now + TIMESKEW >= payload_dict['iat'])
+        if 'nbf' in payload_dict:
+            self.assertTrue(now + TIMESKEW >= payload_dict['nbf'])
+        if 'exp' in payload_dict:
+            self.assertTrue(now - TIMESKEW < payload_dict['exp'])
 
     def test_bad_entity_id(self):
         """Get BoB auth token with bad entity_id"""
