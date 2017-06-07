@@ -1,0 +1,61 @@
+[
+	{
+		"test_description": "Minimal ticket event, TZ=+0200",
+		"time": "19730614T220000+0200",
+		"ticketId": "TICKET_ID"
+	},
+	{
+		"test_description": "Minimal ticket event, UTC",
+		"time": "19730614T220000Z",
+		"ticketId": "TICKET_ID"
+	},
+	{
+		"test_description": "Simple ticket event",
+		"time": "TIMESTAMP",
+		"ticketId": "TICKET_ID",
+		"localEventId": "UUID",
+		"eventResult": 0
+	},
+	{
+		"test_description": "Complex ticket event",
+		"time": "TIMESTAMP",
+		"ticketId": "TICKET_ID",
+		"localEventId": "UUID",
+		"eventResult": 1,
+		"eventReason": "unknown reason",
+		"mtbReference": {
+			"pid": 1,
+			"issuerSignature": "ISSUER_SIGNATURE"
+		},
+		"deviceReference": {
+			"pid": 1,
+			"did": "DEVICE_ID"
+		},
+		"geo": {
+			"lat": 57.770351,
+			"long": 12.255959
+		},
+		"modeOfTransport": "camel",
+		"zone": {
+			"pid": 1,
+			"zoneId": "1337"
+		},
+		"service": {
+			"pid": 1,
+			"serviceId": "1337",
+			"tripId": "1",
+			"blockId": "1"
+		},
+		"stopArea": {
+			"pid": 1,
+			"stopAreaId": "1",
+			"nextStopAreaId": "2"
+		},
+		"validator": {
+			"validatorId": "some validator",
+			"location": "vehicle42",
+			"sublocation": "door A"
+		},
+		"operatingDayDate": "20170101"
+	}
+]

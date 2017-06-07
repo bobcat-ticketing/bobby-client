@@ -1,0 +1,27 @@
+[
+	{
+		"test_description": "Invalid timestamp",
+		"time": "XYZZY",
+		"ticketId": "TICKET_ID"
+	},
+	{
+		"test_description": "Missing required data (no timestamp)",
+		"ticketId": "TICKET_ID"
+	},
+	{
+		"test_description": "Invalid event type",
+		"time": "TIMESTAMP",
+		"ticketId": "TICKET_ID",
+		"eventType": "test"
+	},
+	{
+		"test_description": "Invalid data result",
+		"time": "TIMESTAMP",
+		"ticketId": "TICKET_ID",
+		"eventResult": 0,
+		"mtbReference": {
+			"pid": "XYZZY",
+			"issuerSignature": "ISSUER_SIGNATURE"
+		}
+	}
+]
