@@ -2,6 +2,9 @@
 
 import unittest
 import logging
+import os
+from datetime import datetime, timezone
+from jwkest import b64e
 from bob_test.env import TestEnvironment
 
 
@@ -39,6 +42,24 @@ class TestValidationAPI(unittest.TestCase):
             data = response.json()
             logging.debug(data)
             self.assertEqual(len(data), 1)
+
+    def test_fraudcheck(self):
+        """Test fraudcheck"""
+        params = {
+            'time': datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
+            'geoPosition': {
+                "lat": 57.770351,
+                "long": 12.255959
+            },
+            'mtbReference': {
+                'pid': 1,
+                'issuerSignature': b64e(os.urandom(32)).decode()
+            }
+        }
+        request_uri = '{}/fraudcheck'.format(self.env.endpoint('validation'))
+        response = self.session.get(request_uri, json=params)
+        self.assertEqual(response.status_code, 200)
+        print(response.text)
 
 
 if __name__ == '__main__':
