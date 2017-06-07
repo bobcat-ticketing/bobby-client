@@ -2,7 +2,6 @@
 
 import unittest
 import logging
-import json
 from bob_test.env import TestEnvironment
 
 
@@ -28,7 +27,6 @@ class TestValidationAPI(unittest.TestCase):
 
     def test_get_ticklemacros(self):
         """Test get tickle macros"""    
-
         request_uri = '{}/ticklemacros'.format(self.env.endpoint('validation'))
         response = self.session.get(request_uri)
         self.assertEqual(response.status_code, 200)
