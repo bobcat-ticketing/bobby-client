@@ -1,0 +1,34 @@
+
+
+authentication:
+  entity_id: test_val
+  cert: test.crt
+  key: test.key
+  #token: mektmiasdigoat
+
+http:
+  verify: True
+  #proxies:
+  #  https: http://127.0.0.1:3128/
+
+macros:
+  TICKET_ID: 58221f2f13fc33000713b79c
+
+test:
+  authentication:
+    endpoint: https://test1.mobileticket.se/api/v1
+  device:
+    endpoint: https://test1.mobileticket.se/api/v1
+  product:
+    endpoint: https://test1.mobileticket.se/api/v1
+  ticket:
+    endpoint: https://test1.mobileticket.se/api/v1
+  validation:
+    endpoint: https://test1.mobileticket.se/api/v1
+    good_events: "bob_test/testdata/ticket_events_good.json"
+    bad_events: "bob_test/testdata/ticket_events_bad.json"
+    tickle_macro_serials: [ 1, 2 ]
+  inspection:
+    endpoint: https://test1.mobileticket.se/api/v1
+    good_events: "bob_test/testdata/ticket_events_good.json"
+    bad_events: "bob_test/testdata/ticket_events_bad.json"
