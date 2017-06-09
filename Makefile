@@ -21,7 +21,7 @@ upgrade-venv:: $(VENV)
 	$(VENV)/bin/pip install -r requirements.txt --upgrade
 
 $(BAD_CERT):
-	openssl req -new -x509 -sha256 -days 1 \
+	openssl req -new -x509 -sha256 -days 1000 \
 		-newkey rsa:2048 -nodes -keyout $@ \
 		-subj "/CN=badcert" -out $@
 
