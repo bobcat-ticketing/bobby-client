@@ -27,13 +27,14 @@ class TestValidationAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         logging.debug(response.json())
 
-    def test_get_ticklemacros(self):
+    def test_get_all_ticklemacrosets(self):
         """Test get tickle macros"""
         request_uri = '{}/ticklemacros'.format(self.env.endpoint('validation'))
         response = self.session.get(request_uri)
         self.assertEqual(response.status_code, 200)
-        print(response.text)
 
+    def test_get_single_ticklemacroset(self):
+        """Test get tickle macros"""
         tickle_macro_serials = self.env.config['test']['validation'].get('tickle_macro_serials', [])
         for serial in tickle_macro_serials:
             request_uri = '{}/ticklemacros?serial={}'.format(self.env.endpoint('validation'), serial)
