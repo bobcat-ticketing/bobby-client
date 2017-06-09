@@ -57,7 +57,7 @@ class TestInspectionAPIwithEvents(unittest.TestCase):
         if response.status_code != 201:
             logging.error(response.text)
         self.assertEqual(response.status_code, 201)
-        logging.debug(respons)
+        logging.debug(response)
 
     def test_bad_events(self):
         """Test bad ticket event submission"""
