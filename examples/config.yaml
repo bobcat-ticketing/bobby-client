@@ -1,17 +1,22 @@
-
-
-authentication:
+global:
+  # the entity ID used for all tests (unless overridden later)
   entity_id: test_val
+  # certificate and key filename (relative to the config file)
   cert: test.crt
+  # certificate and key filename (relative to the config file)
   key: test.key
+  # static token (optional)
   #token: mektmiasdigoat
 
 http:
+  # perform certificate validation (default True)
   verify: True
+  # HTTP proxies (optional)
   #proxies:
   #  https: http://127.0.0.1:3128/
 
 macros:
+  # known good ticket ID (for validation/inspection testing)
   TICKET_ID: 58221f2f13fc33000713b79c
 
 test:
@@ -19,6 +24,7 @@ test:
     endpoint: https://test1.mobileticket.se/api/v1
   device:
     endpoint: https://test1.mobileticket.se/api/v1
+    entity_id: test_val
   product:
     endpoint: https://test1.mobileticket.se/api/v1
   ticket:
