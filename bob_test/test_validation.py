@@ -47,24 +47,6 @@ class TestValidationAPI(unittest.TestCase):
             self.assertIn('pid', data)
             self.assertEqual(data['serial'], serial)
 
-    def test_fraudcheck(self):
-        """Test fraudcheck"""
-        params = {
-            'time': datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
-            'geoPosition': {
-                "lat": 57.770351,
-                "long": 12.255959
-            },
-            'mtbReference': {
-                'pid': 1,
-                'issuerSignature': b64e(os.urandom(32)).decode()
-            }
-        }
-        request_uri = '{}/fraudcheck'.format(self.env.endpoint('validation'))
-        response = self.session.get(request_uri, json=params)
-        self.assertEqual(response.status_code, 200)
-        print(response.text)
-
 
 if __name__ == '__main__':
     unittest.main()
