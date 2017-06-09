@@ -17,7 +17,7 @@ DEFAULT_MAX_TTL = 3600
 class TestEnvironment(object):
     """BoB Test Environment helper class"""
 
-    def __init__(self, config: Dict, base_dir: str):
+    def __init__(self, config: Dict, base_dir: str) -> None:
         self.config = config
         self.base_dir = base_dir
 
@@ -27,7 +27,7 @@ class TestEnvironment(object):
         if metadata_filename is not None:
             with open(metadata_filename) as metadata_file:
                 metadata_list = json.load(metadata_file)
-            self.metadata = {}
+            self.metadata = {}  # type: Dict
             for entry in metadata_list:
                 pid = entry['pid']
                 self.metadata[str(pid)] = entry

@@ -23,7 +23,7 @@ class TestInspectionAPIwithEvents(unittest.TestCase):
         """Submit ticket events"""
         logging.info("Submitting %s", event['test_description'])
         del event['test_description']
-        logging.debug(event)
+        logging.debug(str(event))
         response = self.session.post("{}/{}".format(request_uri, event['ticketId']), json=event)
         if response.status_code != expected_status:
             logging.error(response.text)
