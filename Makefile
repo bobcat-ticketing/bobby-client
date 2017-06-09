@@ -10,9 +10,6 @@ all:
 lint: $(VENV)
 	$(VENV)/bin/pylint $(SOURCE)
 
-$(WHEELHOUSE):
-	mkdir $@
-
 $(VENV): requirements.txt
 	$(PYTHON) -m venv $(VENV)
 	$(VENV)/bin/pip install -r requirements.txt
