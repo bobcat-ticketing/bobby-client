@@ -50,11 +50,11 @@ EVENT_SLOW = {
         "pid": 1,
         "issuerSignature": ISSUER_SIGNATURE
     },
-    'time': '20170521T201000Z',
+    'time': '20170521T200500Z',
     'modeOfTransport': 'bus',
     'geo': {
-        'lat': 57.708074,
-        'long': 11.973297
+        'lat': 57.7701897,
+        'long': 12.2677485
     }
 }
 
