@@ -53,6 +53,11 @@ class TestAuthenticationAPI(unittest.TestCase):
         response = self.env.get_auth_response(entity_id=BAD_ENTITY_ID)
         self.assertEqual(response.status_code, 404)
 
+    def test_no_certificate(self):
+        """Get BoB auth token without a certificate"""
+        response = self.env.get_auth_response(cert=(None,None))
+        self.assertEqual(response.status_code, 401)
+
     def test_bad_certificate(self):
         """Get BoB auth token with bad certificate"""
         response = self.env.get_auth_response(cert=(BAD_CERT,None))
