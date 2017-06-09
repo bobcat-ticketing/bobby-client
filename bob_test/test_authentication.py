@@ -18,14 +18,14 @@ class TestAuthenticationAPI(unittest.TestCase):
 
     def setUp(self):
         logging.basicConfig(level=logging.DEBUG)
-        self.env = TestEnvironment.create_from_config_file('examples/config.yaml')
+        self.env = TestEnvironment.create_from_config_file()
 
     def tearDown(self):
         self.env.close()
 
     def test_get_token(self):
         """Get BoB auth token (good)"""
-        response = self.env.get_auth_response()
+        response = self.env.get_auth_response(api='authentication')
         now = int(time.time())
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -55,12 +55,12 @@ class TestAuthenticationAPI(unittest.TestCase):
 
     def test_no_certificate(self):
         """Get BoB auth token without a certificate"""
-        response = self.env.get_auth_response(cert=(None,None))
+        response = self.env.get_auth_response(api='authentication', cert=(None,None))
         self.assertEqual(response.status_code, 401)
 
     def test_bad_certificate(self):
         """Get BoB auth token with bad certificate"""
-        response = self.env.get_auth_response(cert=(BAD_CERT,None))
+        response = self.env.get_auth_response(api='authentication', cert=(BAD_CERT,None))
         self.assertEqual(response.status_code, 401)
 
 

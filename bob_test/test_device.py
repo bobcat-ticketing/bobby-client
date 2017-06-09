@@ -13,10 +13,10 @@ class TestDeviceAPI(unittest.TestCase):
 
     def setUp(self):
         logging.basicConfig(level=logging.DEBUG)
-        self.env = TestEnvironment.create_from_config_file('examples/config.yaml')
+        self.env = TestEnvironment.create_from_config_file()
         self.did = b64e(str(uuid.uuid4()).encode()).decode()
         self.session = self.env.get_session()
-        self.env.authenticate(self.session)
+        self.env.authenticate(self.session, api='device')
 
     def tearDown(self):
         self.session.close()

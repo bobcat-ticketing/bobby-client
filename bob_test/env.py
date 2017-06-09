@@ -10,7 +10,7 @@ from ruamel import yaml
 import requests
 
 
-DEFAULT_CONF = "examples/config.yaml"
+DEFAULT_CONF = "./config.yaml"
 DEFAULT_MAX_TTL = 3600
 
 
@@ -36,7 +36,7 @@ class TestEnvironment(object):
 
         self.macros = self.config.get('macros', {})
         self.httpconfig = self.config.get('http')
-        self.authconfig = self.config.get('authentication')
+        self.authconfig = self.config.get('global')
         self.entity_id = self.authconfig.get('entity_id')
         self.cert_filename = self.get_filepath(self.authconfig.get('cert'))
         self.key_filename = self.get_filepath(self.authconfig.get('key'))
@@ -49,9 +49,9 @@ class TestEnvironment(object):
         """Get endpoint by API"""
         return self.config['test'][api]['endpoint']
 
-    def authenticate(self, session: requests.Session) -> None:
+    def authenticate(self, session: requests.Session, api: str = None) -> None:
         """Add BoB authentication to session (use static token if configured) """
-        token = self.authconfig.get('token', self.get_auth_jwt_compact())
+        token = self.authconfig.get('token', self.get_auth_jwt_compact(api))
         session.headers["X-BoB-AuthToken"] = token
 
     def get_session(self) -> requests.Session:
@@ -64,9 +64,13 @@ class TestEnvironment(object):
         return session
 
     def get_auth_response(self,
+                          api: str = None,
                           entity_id: str = None,
                           cert: Tuple[str, str] = None) -> requests.Response:
         """Get authentication response"""
+        if api is not None:
+            if 'entity_id' in self.config['test'][api]:
+                entity_id = self.config['test'][api]['entity_id']
         if entity_id is None:
             entity_id = self.entity_id
         if cert is None:
@@ -81,9 +85,9 @@ class TestEnvironment(object):
         request_uri = '{}/auth/{}'.format(endpoint, entity_id)
         return requests.get(url=request_uri, cert=cert, verify=verify, proxies=proxies)
 
-    def get_auth_jwt_compact(self) -> str:
+    def get_auth_jwt_compact(self, api: str = None) -> str:
         """Get authentication JWT compact"""
-        response = self.get_auth_response()
+        response = self.get_auth_response(api=api)
         if response.status_code != 200:
             response.raise_for_status()
         data = response.json()
