@@ -29,15 +29,20 @@ test:
     endpoint: https://test1.mobileticket.se/api/v1
     # products to acquire manifests for
     manifests: "bobby_client/testdata/product_manifests.json"
+    # filters to test
     filters: "bobby_client/testdata/product_filters.json"
   ticket:
     endpoint: https://test1.mobileticket.se/api/v1
   validation:
     endpoint: https://test1.mobileticket.se/api/v1
+    # list of known good events to submit
     good_events: "bobby_client/testdata/ticket_events_good.json"
+    # list of known bad events to submit
     bad_events: "bobby_client/testdata/ticket_events_bad.json"
     tickle_macro_serials: [ 1, 2 ]
   inspection:
     endpoint: https://test1.mobileticket.se/api/v1
+    # list of known good events to submit
     good_events: "bobby_client/testdata/ticket_events_good.json"
+    # list of known bad events to submit
     bad_events: "bobby_client/testdata/ticket_events_bad.json"
