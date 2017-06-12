@@ -49,17 +49,6 @@ class TestEnvironment(object):
 
         self.logger = logging.getLogger(__name__)
 
-        metadata_filename = self.get_filepath(self.config.get('metadata'))
-        if metadata_filename is not None:
-            with open(metadata_filename) as metadata_file:
-                metadata_list = json.load(metadata_file)
-            self.metadata = {}  # type: Dict
-            for entry in metadata_list:
-                pid = entry['pid']
-                self.metadata[str(pid)] = entry
-        else:
-            self.metadata = None
-
         self.macros = self.config.get('macros', {})
         self.httpconfig = self.config.get('http')
         self.authconfig = self.config.get('global')
