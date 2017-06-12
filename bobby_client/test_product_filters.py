@@ -12,10 +12,10 @@ class TestProductAPIwithFilters(unittest.TestCase):
         logging.basicConfig(level=logging.DEBUG)
         self.env = TestEnvironment.create_from_config_file()
         self.session = self.env.get_session()
-        self.env.authenticate(self.session, api='product')
         filename = self.env.config['test']['product']['filters']
         with open(filename) as filters_file:
             self.filters = json.load(filters_file)
+        self.env.authenticate(self.session, api='product')
 
     def tearDown(self):
         self.session.close()
