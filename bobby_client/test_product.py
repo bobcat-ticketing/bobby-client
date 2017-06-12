@@ -42,6 +42,7 @@ class TestProductAPI(unittest.TestCase):
                 product_selections = [{'productId': product_id}]
             elif 'selection' in selector:
                 logging.info("Get manifest via product selection")
+                product_selections = selector['selection']
             else:
                 raise RuntimeError("Unknown manifest format: " + selector)
 
