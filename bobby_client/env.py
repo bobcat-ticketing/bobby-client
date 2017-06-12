@@ -46,9 +46,7 @@ class TestEnvironment(object):
     def __init__(self, config: Dict, base_dir: str) -> None:
         self.config = config
         self.base_dir = base_dir
-
         self.logger = logging.getLogger(__name__)
-
         self.macros = self.config.get('macros', {})
         self.httpconfig = self.config.get('http')
         self.authconfig = self.config.get('global')
