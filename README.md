@@ -2,6 +2,8 @@
 
 This repository contains a set of scripts to test [BoB](http://http://bob.samtrafiken.se/) server implementations and is provided by [Samtrafiken](https://samtrafiken.se/) under a [BSD license](LICENSE).
 
+The scripts are written in [Python 3](https://www.python.org/) and built using the standard [Python unit testing framework](https://docs.python.org/3/library/unittest.html).
+
 For questions and support, please contact [bobsupport@samtrafiken.se](mailto:bobsupport@samtrafiken.se).
 
 

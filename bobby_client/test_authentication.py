@@ -34,13 +34,17 @@ class TestAuthenticationAPI(unittest.TestCase):
         payload_dict = json.loads(b64d(payload.encode()))
         signature_dict = b64d(signature.encode())
 
+        # check for supported algorithms
         self.assertIn(header_dict['alg'], TOKEN_ALGS)
+
+        # ensure some headers are not missing
         self.assertIsNotNone(header_dict.get('kid'))
         self.assertIsNotNone(payload_dict.get('iss'))
         self.assertIsNotNone(payload_dict.get('sub'))
         self.assertIsNotNone(payload_dict.get('bobAuthZ'))
         self.assertIsNotNone(payload_dict.get('exp'))
 
+        # ensure iat/nbf/exp are reasonable (if provided)
         if 'iat' in payload_dict:
             self.assertTrue(now + TIMESKEW >= payload_dict['iat'])
         if 'nbf' in payload_dict:
