@@ -1,0 +1,249 @@
+{
+	"group": [
+		{
+			"operation": "post",
+			"payload": {
+				"group": {
+					"groupType": "zone",
+					"groupIds": [
+						"820"
+					]
+				},
+				"fareCategoryIds": [
+					"day"
+				]
+			},
+			"code": 200,
+			"amount": [
+				15,
+				25,
+				45
+			]
+		},
+		{
+			"operation": "post",
+			"payload": {
+				"group": {
+					"groupType": "zone",
+					"groupIds": [
+						"820",
+						"821"
+					]
+				},
+				"fareCategoryIds": [
+					"day"
+				]
+			},
+			"code": 200,
+			"amount": [
+				23,
+				38,
+				68
+			]
+		},
+		{
+			"operation": "post",
+			"payload": {
+				"group": {
+					"groupType": "zone",
+					"groupIds": [
+						"820",
+						"821",
+						"822"
+					]
+				},
+				"fareCategoryIds": [
+					"day"
+				],
+				"travellerCategoryIds": [
+					"a"
+				]
+			},
+			"code": 200,
+			"amount": [
+				49
+			]
+		},
+		{
+			"operation": "post",
+			"payload": {
+				"group": {
+					"groupType": "zone",
+					"groupIds": [
+						"99999"
+					]
+				},
+				"travellerCategoryIds": [
+					"a"
+				]
+			},
+			"code": 404
+		},
+		{
+			"operation": "post",
+			"payload": {
+				"group": {
+					"groupType": "zone",
+					"groupIds": [
+						"820",
+						"821",
+						"870"
+					]
+				},
+				"travellerCategoryIds": [
+					"a"
+				]
+			},
+			"code": 422
+		}
+	],
+	"query": [
+		{
+			"operation": "get",
+			"query": {
+				"originLocation": "7411233",
+				"fareCategoryId": "day",
+				"productCategoryId": "single",
+				"travellerCategoryId": "a"
+			},
+			"code": 200,
+			"amount": [
+				25
+			]
+		},
+		{
+			"operation": "get",
+			"query": {
+				"originLocation": "7411233",
+				"destinationLocation": "7417164",
+				"fareCategoryId": "day",
+				"productCategoryId": "single",
+				"travellerCategoryId": "a"
+			},
+			"code": 200,
+			"amount": [
+				25,
+				38
+			]
+		},
+		{
+			"operation": "get",
+			"query": {
+				"originLocation": "7422840",
+				"destinationLocation": "7433679",
+				"fareCategoryId": "day",
+				"productCategoryId": "single",
+				"travellerCategoryId": "a"
+			},
+			"code": 200,
+			"amount": [
+				103,
+				93,
+				113,
+				103
+			]
+		},
+		{
+			"operation": "get",
+			"query": {
+				"originLocation": "999999",
+				"destinationLocation": "7422840",
+				"fareCategoryId": "day",
+				"productCategoryId": "single",
+				"travellerCategoryId": "a"
+			},
+			"code": 404
+		}
+	],
+	"route": [
+		{
+			"operation": "post",
+			"payload": {
+				"route": [
+					{
+						"groupId": {
+							"type": "zone",
+							"id": "820"
+						}
+					},
+					{
+						"groupId": {
+							"type": "zone",
+							"id": "821"
+						}
+					}
+				],
+				"fareCategoryIds": [
+					"day"
+				],
+				"productCategoryIds": [
+					"single"
+				],
+				"travellerCategoryIds": [
+					"a"
+				]
+			},
+			"code": 200,
+			"amount": [
+				38
+			]
+		},
+		{
+			"operation": "post",
+			"payload": {
+				"route": [
+					{
+						"stopId": "7411233"
+					},
+					{
+						"stopId": "7417164"
+					}
+				],
+				"fareCategoryIds": [
+					"day"
+				],
+				"productCategoryIds": [
+					"single"
+				],
+				"travellerCategoryIds": [
+					"a"
+				]
+			},
+			"code": 200,
+			"amount": [
+				25,
+				38
+			]
+		},
+		{
+			"operation": "post",
+			"payload": {
+				"route": [
+					{
+						"stopId": "7417164"
+					},
+					{
+						"stopId": "7411233"
+					},
+					{
+						"stopId": "7422840"
+					}
+				],
+				"fareCategoryIds": [
+					"day"
+				],
+				"productCategoryIds": [
+					"single"
+				],
+				"travellerCategoryIds": [
+					"a"
+				]
+			},
+			"code": 200,
+			"amount": [
+				49,
+				38
+			]
+		}
+	]
+}

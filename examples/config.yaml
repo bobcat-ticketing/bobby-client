@@ -27,6 +27,7 @@ test:
     entity_id: test_val
   product:
     endpoint: https://test1.mobileticket.se/api/v1
+    filters: "bobby_client/testdata/product_filters.json"
   ticket:
     endpoint: https://test1.mobileticket.se/api/v1
   validation:
