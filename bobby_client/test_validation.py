@@ -5,7 +5,7 @@ import logging
 import os
 from datetime import datetime, timezone
 from jwkest import b64e
-from bob_test.env import TestEnvironment
+from bobby_client.env import TestEnvironment
 
 
 class TestValidationAPI(unittest.TestCase):

@@ -1,4 +1,4 @@
-SOURCE=		bob_test
+SOURCE=		bobby_client
 
 PYTHON=		python3
 VENV=		venv

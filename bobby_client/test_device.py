@@ -6,7 +6,7 @@ import json
 import uuid
 import requests
 from jwkest import b64e
-from bob_test.env import TestEnvironment
+from bobby_client.env import TestEnvironment
 
 
 class TestDeviceAPI(unittest.TestCase):

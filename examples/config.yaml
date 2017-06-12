@@ -31,10 +31,10 @@ test:
     endpoint: https://test1.mobileticket.se/api/v1
   validation:
     endpoint: https://test1.mobileticket.se/api/v1
-    good_events: "bob_test/testdata/ticket_events_good.json"
-    bad_events: "bob_test/testdata/ticket_events_bad.json"
+    good_events: "bobby_client/testdata/ticket_events_good.json"
+    bad_events: "bobby_client/testdata/ticket_events_bad.json"
     tickle_macro_serials: [ 1, 2 ]
   inspection:
     endpoint: https://test1.mobileticket.se/api/v1
-    good_events: "bob_test/testdata/ticket_events_good.json"
-    bad_events: "bob_test/testdata/ticket_events_bad.json"
+    good_events: "bobby_client/testdata/ticket_events_good.json"
+    bad_events: "bobby_client/testdata/ticket_events_bad.json"

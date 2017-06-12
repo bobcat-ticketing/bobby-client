@@ -22,4 +22,4 @@ To run the full test suite using [green](https://github.com/CleanCut/green), use
 
 It is also possible to run individual test suites. E.g., to run the authentication tests one can use the following command:
 
-    green -vv bob_test/test_authentication.py
+    green -vv bobby_client/test_authentication.py

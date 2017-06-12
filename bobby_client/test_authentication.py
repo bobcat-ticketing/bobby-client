@@ -6,7 +6,7 @@ import uuid
 import json
 import time
 from jwkest import b64d
-from bob_test.env import TestEnvironment
+from bobby_client.env import TestEnvironment
 
 
 BAD_ENTITY_ID = str(uuid.uuid4())
