@@ -5,13 +5,6 @@ import logging
 from bobby_client.env import TestEnvironment
 
 
-PRODUCT_QUERY = {
-    'originLocation': "7411233",
-    'destinationLocation': "7422840",
-    'fareCategoryId': "day",
-    'productCategoryId': "single",
-    'travellerCategoryId': "a"
-}
 PRODUCT_FILTER = {
     'group': {'groupType':'zone', 'groupIds': ['820', '821', '822']},
     'travellerCategoryIds': ['a']
@@ -34,14 +27,6 @@ class TestProductAPI(unittest.TestCase):
         """Test product search"""
         request_uri = '{}/product'.format(self.env.endpoint('product'))
         response = self.session.post(request_uri, json=PRODUCT_FILTER)
-        self.assertEqual(response.status_code, 200)
-        result = response.json()
-        self.assertTrue(len(result) > 0)
-
-    def test_product_query(self):
-        """Test product search using query parameters"""
-        request_uri = '{}/product'.format(self.env.endpoint('product'))
-        response = self.session.get(request_uri, params=PRODUCT_QUERY)
         self.assertEqual(response.status_code, 200)
         result = response.json()
         self.assertTrue(len(result) > 0)
