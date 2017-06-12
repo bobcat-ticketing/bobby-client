@@ -14,6 +14,32 @@ DEFAULT_CONF = "./config.yaml"
 DEFAULT_MAX_TTL = 3600
 
 
+class DebugSession(requests.Session):
+
+
+    def send(self, *args, **kwargs):
+        """Send request, log request and response"""
+
+        tag = str(uuid.uuid4())
+        request = args[0]
+        logging.debug("REQUEST %s METHOD: %s", tag, request.method)
+        logging.debug("REQUEST %s URL: %s", tag, request.url)
+        logging.debug("REQUEST %s HEADERS: %s", tag, request.headers)
+        logging.debug("REQUEST %s CERT: %s", tag, kwargs.get('cert'))
+        
+        proxies = kwargs.get('proxies')
+        if proxies is not None:
+            logging.debug("REQUEST %s PROXIES: %s", tag, proxies)
+
+        response = super().send(*args, **kwargs)
+
+        logging.debug("RESPONSE %s STATUS: %d", tag, response.status_code)
+        logging.debug("RESPONSE %s HEADERS: %s", tag, response.headers)
+        logging.debug("RESPONSE %s CONTENT: %s", tag, response.text)
+
+        return response
+
+
 class TestEnvironment(object):
     """BoB Test Environment helper class"""
 
@@ -56,7 +82,7 @@ class TestEnvironment(object):
 
     def get_session(self) -> requests.Session:
         """Get session with proxies and auth"""
-        session = requests.Session()
+        session = DebugSession()
         session.cert = (self.cert_filename, self.key_filename)
         if self.httpconfig is not None:
             session.verify = self.httpconfig.get('verify', True)
@@ -83,7 +109,9 @@ class TestEnvironment(object):
             proxies = None
         endpoint = self.endpoint('authentication')
         request_uri = '{}/auth/{}'.format(endpoint, entity_id)
-        return requests.get(url=request_uri, cert=cert, verify=verify, proxies=proxies)
+        with DebugSession() as session:
+            response = session.get(url=request_uri, cert=cert, verify=verify, proxies=proxies)
+        return response
 
     def get_auth_jwt_compact(self, api: str = None) -> str:
         """Get authentication JWT compact"""
