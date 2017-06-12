@@ -1,0 +1,24 @@
+[
+	{
+		"selection": [
+			{
+				"productId": "593e5bf1dae4e600089e788f"
+			}
+		]
+	},
+	{
+		"filter": {
+			"group": {
+				"groupType": "zone",
+				"groupIds": [
+					"820",
+					"821",
+					"822"
+				]
+			},
+			"travellerCategoryIds": [
+				"a"
+			]
+		}
+	}
+]
