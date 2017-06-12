@@ -19,7 +19,7 @@ class TestInspectionAPIwithEvents(unittest.TestCase):
         self.session.close()
         self.env.close()
 
-    def submit_event(self, event: Dict, request_uri: str, expected_status: int):
+    def _submit_event(self, event: Dict, request_uri: str, expected_status: int):
         """Submit ticket events"""
         logging.info("Submitting %s", event['test_description'])
         del event['test_description']
@@ -39,7 +39,7 @@ class TestInspectionAPIwithEvents(unittest.TestCase):
         for event in events:
             if not 'eventType' in event:
                 event['eventType'] = 'inspection'
-            self.submit_event(self.env.update_dict_macros(event), request_uri, 201)
+            self._submit_event(self.env.update_dict_macros(event), request_uri, 201)
 
     def test_good_events_report(self):
         """Test good ticket event report submission"""
@@ -68,7 +68,7 @@ class TestInspectionAPIwithEvents(unittest.TestCase):
         for event in events:
             if not 'eventType' in event:
                 event['eventType'] = 'inspection'
-            self.submit_event(self.env.update_dict_macros(event), request_uri, 400)
+            self._submit_event(self.env.update_dict_macros(event), request_uri, 400)
 
 
 if __name__ == '__main__':
