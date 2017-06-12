@@ -27,6 +27,8 @@ test:
     entity_id: test_val
   product:
     endpoint: https://test1.mobileticket.se/api/v1
+    # products to acquire manifests for
+    manifests: "bobby_client/testdata/product_manifests.json"
     filters: "bobby_client/testdata/product_filters.json"
   ticket:
     endpoint: https://test1.mobileticket.se/api/v1
