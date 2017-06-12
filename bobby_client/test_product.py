@@ -36,22 +36,18 @@ class TestProductAPI(unittest.TestCase):
         """Test manifest search"""
 
         for selector in self.manifests:
-            print("MANIFEST: ", selector)
-
             if 'filter' in selector:
                 logging.info("Get manifest via product filter")
                 product_id = self._find_first_product(selector['filter'])
                 product_selections = [{'productId': product_id}]
             elif 'selection' in selector:
                 logging.info("Get manifest via product selection")
-                product_selections = selector['selection']
             else:
                 raise RuntimeError("Unknown manifest format: " + selector)
 
             manifest_request = {
                 'productSelections': product_selections
             }
-            print("MANIFEST_REQ: ", manifest_request)
             request_uri = '{}/manifest'.format(self.env.endpoint('product'))
             response = self.session.post(request_uri, json=manifest_request)
             self.assertEqual(response.status_code, 201)
