@@ -22,7 +22,6 @@ class TestValidationAPI(unittest.TestCase):
         request_uri = '{}/blacklist?blacklistEntryId=0'.format(self.env.endpoint('device'))
         response = self.session.get(request_uri)
         self.assertEqual(response.status_code, 200)
-        logging.debug(response.json())
 
     def test_get_all_ticklemacrosets(self):
         """Test get tickle macros"""
@@ -38,7 +37,6 @@ class TestValidationAPI(unittest.TestCase):
             response = self.session.get(request_uri)
             self.assertEqual(response.status_code, 200)
             data = response.json()
-            logging.debug(data)
             self.assertEqual(len(data), 3)
             self.assertIn('macros', data)
             self.assertIn('pid', data)

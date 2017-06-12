@@ -42,7 +42,6 @@ class TestProductAPIwithFilters(unittest.TestCase):
             self.assertEqual(response.status_code, test_case['code'])
 
             if response.status_code == 200:
-                logging.debug("RESPONSE: %s", response.text)
                 result = response.json()
 
                 if 'amount' in test_case:

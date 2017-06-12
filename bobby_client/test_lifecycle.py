@@ -58,7 +58,6 @@ class TestTicketLifecycle(unittest.TestCase):
         response = self.session_pos.post(request_uri, json=ticket_request)
         self.assertEqual(response.status_code, 201)
         result = response.json()
-        logging.debug(result)
         ticket_id = result['ticketIds'][0]
         logging.info("TICKET ID: %s", ticket_id)
 
@@ -76,7 +75,6 @@ class TestTicketLifecycle(unittest.TestCase):
         }
         response = self.session_val.post(request_uri, json=validation_event)
         self.assertEqual(response.status_code, 201)
-        logging.debug(response.json())
 
 
 if __name__ == '__main__':

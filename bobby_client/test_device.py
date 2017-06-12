@@ -27,7 +27,6 @@ class TestDeviceAPI(unittest.TestCase):
         request_uri = "{}/device/kdk".format(self.env.endpoint('device'))
         response = self.session.get(request_uri)
         self.assertEqual(response.status_code, 200)
-        logging.debug(response.json())
 
     def test_get_device_key(self):
         """Get device key"""
@@ -35,7 +34,6 @@ class TestDeviceAPI(unittest.TestCase):
         payload = {'did': self.did}
         response = self.session.post(request_uri, json=payload)
         self.assertEqual(response.status_code, 201)
-        logging.debug(response.json())
 
     def test_get_bad_kdk(self):
         """Get KDK (unauthenticated)"""
@@ -43,7 +41,6 @@ class TestDeviceAPI(unittest.TestCase):
         with self.env.get_session() as unauth_session:
             response = unauth_session.get(request_uri)
             self.assertEqual(response.status_code, 401)
-            logging.debug(response.json())
 
     def test_get_bad_device_key(self):
         """Get device key (unauthenticated)"""
@@ -52,7 +49,6 @@ class TestDeviceAPI(unittest.TestCase):
             payload = {'did': self.did}
             response = unauth_session.post(request_uri, json=payload)
             self.assertEqual(response.status_code, 401)
-            logging.debug(response.json())
 
 
 if __name__ == '__main__':

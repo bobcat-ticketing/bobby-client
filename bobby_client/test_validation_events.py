@@ -23,12 +23,8 @@ class TestValidationAPIwithEvents(unittest.TestCase):
         """Submit ticket events"""
         logging.info("Submitting %s", event['test_description'])
         del event['test_description']
-        logging.debug(str(event))
         response = self.session.post("{}/{}".format(request_uri, event['ticketId']), json=event)
-        if response.status_code != expected_status:
-            logging.error(response.text)
         self.assertEqual(response.status_code, expected_status)
-        logging.debug(response.json())
 
     def test_good_events(self):
         """Test good ticket event submission"""
@@ -54,10 +50,7 @@ class TestValidationAPIwithEvents(unittest.TestCase):
             del event['test_description']
             report.append(self.env.update_dict_macros(event))
         response = self.session.post(request_uri, json=report)
-        if response.status_code != 201:
-            logging.error(response.text)
         self.assertEqual(response.status_code, 201)
-        logging.debug(response.text)
 
     def test_bad_events(self):
         """Test bad ticket event submission"""

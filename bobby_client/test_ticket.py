@@ -6,7 +6,7 @@ import unittest
 class TestTicketAPI(unittest.TestCase):
 
     def setUp(self):
-        #logging.basicConfig(level=logging.DEBUG)
+        logging.basicConfig(level=logging.DEBUG)
         self.env = TestEnvironment.create_from_config_file()
 
     def tearDown(self):

@@ -32,25 +32,19 @@ class TestProductAPI(unittest.TestCase):
 
     def test_product_search(self):
         """Test product search"""
-
         request_uri = '{}/product'.format(self.env.endpoint('product'))
         response = self.session.post(request_uri, json=PRODUCT_FILTER)
         self.assertEqual(response.status_code, 200)
-
         result = response.json()
         self.assertTrue(len(result) > 0)
-        logging.debug(result)
 
     def test_product_query(self):
         """Test product search using query parameters"""
-
         request_uri = '{}/product'.format(self.env.endpoint('product'))
         response = self.session.get(request_uri, params=PRODUCT_QUERY)
         self.assertEqual(response.status_code, 200)
-
         result = response.json()
         self.assertTrue(len(result) > 0)
-        logging.debug(result)
 
     def test_manifest(self):
         """Test manifest search"""
@@ -74,7 +68,6 @@ class TestProductAPI(unittest.TestCase):
 
         result = response.json()
         self.assertTrue(len(result) > 0)
-        logging.debug(result)
 
         # refetch manifest and compare
         manifest = result['manifest']
@@ -95,7 +88,6 @@ class TestProductAPI(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             result = response.json()
             self.assertTrue(len(result) > 0)
-            logging.debug(result)
 
 
 if __name__ == '__main__':
