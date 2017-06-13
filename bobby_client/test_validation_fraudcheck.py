@@ -83,7 +83,7 @@ class TestValidationFraudcheckAPI(unittest.TestCase):
         # submit fraudcheck query
         params = {
             'time': EVENT_FAST['time'],
-            'geoPosition': EVENT_FAST['geo'],
+            'geo': EVENT_FAST['geo'],
             'mtbReference': EVENT_FAST['mtbReference']
         }
         request_uri = '{}/fraudcheck'.format(self.env.endpoint('validation'))
@@ -105,7 +105,7 @@ class TestValidationFraudcheckAPI(unittest.TestCase):
         # submit fraudcheck query
         params = {
             'time': EVENT_SLOW['time'],
-            'geoPosition': EVENT_SLOW['geo'],
+            'geo': EVENT_SLOW['geo'],
             'mtbReference': EVENT_SLOW['mtbReference']
         }
         request_uri = '{}/fraudcheck'.format(self.env.endpoint('validation'))
