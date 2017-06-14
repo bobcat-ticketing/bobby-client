@@ -2,6 +2,7 @@ SOURCE=		bobby_client
 
 PYTHON=		python3
 VENV=		venv
+GREEN=		$(VENV)/bin/green -vv
 
 BAD_CERT=	badcert.pem
 
@@ -23,7 +24,28 @@ $(BAD_CERT):
 		-subj "/CN=badcert" -out $@
 
 test: $(BAD_CERT)
-	$(VENV)/bin/green -vv
+	$(GREEN)
+
+test-authentication: $(BAD_CERT)
+	$(GREEN) $(SOURCE)/test_authentication*.py
+
+test-device:
+	$(GREEN) $(SOURCE)/test_device*.py
+
+test-product:
+	$(GREEN) $(SOURCE)/test_product*.py
+
+test-ticket:
+	$(GREEN) $(SOURCE)/test_ticket*.py
+
+test-validation:
+	$(GREEN) $(SOURCE)/test_validation*.py
+
+test-inspection:
+	$(GREEN) $(SOURCE)/test_inspection*.py
+
+test-lifecycle:
+	$(GREEN) $(SOURCE)/test_lifecycle*.py
 
 typecheck: $(VENV)
 	$(VENV)/bin/mypy -s $(SOURCE)

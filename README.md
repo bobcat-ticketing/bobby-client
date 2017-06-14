@@ -22,6 +22,15 @@ To run the full test suite using [green](https://github.com/CleanCut/green), use
 
     make test
 
-It is also possible to run individual test suites. E.g., to run the authentication tests one can use the following command:
+It is also possible run test suites for individual APIs:
 
-    green -vv bobby_client/test_authentication.py
+    make test-authentication
+    make test-device
+    make test-product
+    make test-ticket
+    make test-validation
+    make test-inspection
+
+To run a complete lifecycle test (product+ticket+validation):
+
+    make test-lifecycle
