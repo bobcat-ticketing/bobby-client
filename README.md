@@ -15,6 +15,8 @@ A virtual environment with all dependencies is needed for testing and is set up 
 
 The test suite requires some configuration in the configuration file ``config.yaml`` read from the current working directory. Annotated example configuration file available as [examples/config.yaml](examples/config.yaml).
 
+[bobby_client/testdata](bobby_client/testdata) contain example configuration data for testing known good/bad events, product filters and product manifest requests.
+
 
 ## Testing
 
