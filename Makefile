@@ -48,7 +48,7 @@ test-lifecycle:
 	$(GREEN) $(SOURCE)/test_lifecycle*.py
 
 typecheck: $(VENV)
-	$(VENV)/bin/mypy -s $(SOURCE)
+	$(VENV)/bin/mypy --ignore-missing-imports $(SOURCE)
 
 clean:
 	rm -f $(BAD_CERT)

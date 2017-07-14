@@ -1,5 +1,5 @@
 green
-mypy-lang
+mypy
 pyjwkest
 pylint
 requests
