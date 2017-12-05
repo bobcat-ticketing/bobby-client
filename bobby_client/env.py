@@ -33,6 +33,7 @@ class DebugSession(requests.Session):
 
         response = super().send(*args, **kwargs)
 
+        logging.debug("RESPONSE %s URL: %s", tag, response.url)
         logging.debug("RESPONSE %s STATUS: %d", tag, response.status_code)
         logging.debug("RESPONSE %s HEADERS: %s", tag, response.headers)
         logging.debug("RESPONSE %s CONTENT: %s", tag, response.text)
