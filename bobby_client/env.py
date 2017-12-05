@@ -63,8 +63,13 @@ class TestEnvironment(object):
         return self.config['test'][api]['endpoint']
 
     def authenticate(self, session: requests.Session, api: str = None) -> None:
-        """Add BoB authentication to session (use static token if configured) """
-        token = self.authconfig.get('token', self.get_auth_jwt_compact(api))
+        """Add BoB authentication to session (use static token if configured)"""
+        token = self.authconfig.get('token')
+        if token is not None:
+            logging.debug("Authentication via static token: %s", token)
+        else:
+            logging.debug("Authentication via authentication endpoint")
+            token = self.get_auth_jwt_compact(api)
         session.headers["X-BoB-AuthToken"] = token
 
     def get_session(self) -> requests.Session:
