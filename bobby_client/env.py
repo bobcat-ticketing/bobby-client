@@ -67,7 +67,7 @@ class TestEnvironment(object):
         """Add BoB authentication to session (use static token if configured)"""
         token = self.authconfig.get('token')
         if token is not None:
-            logging.debug("Authentication via static token: %s", token)
+            logging.debug("Authentication via static token")
         else:
             logging.debug("Authentication via authentication endpoint")
             token = self.get_auth_jwt_compact(api)
