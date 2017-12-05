@@ -1,0 +1,91 @@
+$schema: http://json-schema.org/schema#
+
+type: object
+additionalProperties: false
+required:
+  - global
+  - http
+  - macros
+  - test
+properties:
+  global:
+    type: object
+    additionalProperties: false
+    properties:
+      entity_id:
+        type: string
+      cert:
+        type: string
+      key: 
+        type: string
+      token:
+        type: string
+  http:
+    type: object
+    additionalProperties: false
+    properties:
+      verify:
+        type: boolean
+      proxies:
+        type: object
+  macros:
+    type: object
+  test:
+    type: object
+    additionalProperties: false
+    properties:
+      authentication:
+        allOf:
+          - $ref: '#/definitions/test_generic'
+      device:
+        allOf:
+          - $ref: '#/definitions/test_generic'
+      product:
+        allOf:
+          - $ref: '#/definitions/test_generic'
+          - $ref: '#/definitions/test_product'
+      ticket:
+        allOf:
+          - $ref: '#/definitions/test_generic'
+      validation:
+        allOf:
+          - $ref: '#/definitions/test_generic'
+          - $ref: '#/definitions/test_validation'
+      inspection:
+        allOf:
+          - $ref: '#/definitions/test_generic'
+          - $ref: '#/definitions/test_inspection'
+
+definitions:
+  test_generic:
+    type: object
+    properties:
+      endpoint:
+        type: string
+      entity_id:
+        type: string
+  test_product:
+    type: object
+    properties:
+      manifests:
+        type: string
+      filters:
+        type: string
+  test_validation:
+    type: object
+    properties:
+      good_events:
+        type: string
+      bad_events:
+        type: string
+      tickle_macro_serials:
+        type: array
+        items:
+          type: number
+  test_inspection:
+    type: object
+    properties:
+      good_events:
+        type: string
+      bad_events:
+        type: string
