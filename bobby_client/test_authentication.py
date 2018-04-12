@@ -14,6 +14,7 @@ BAD_CERT = 'badcert.pem'
 TOKEN_ALGS = ('ES256', 'RS256')
 TIMESKEW = 300
 
+
 class TestAuthenticationAPI(unittest.TestCase):
 
     def setUp(self):
@@ -59,12 +60,12 @@ class TestAuthenticationAPI(unittest.TestCase):
 
     def test_no_certificate(self):
         """Get BoB auth token without a certificate"""
-        response = self.env.get_auth_response(api='authentication', cert=(None,None))
+        response = self.env.get_auth_response(api='authentication', cert=(None, None))
         self.assertEqual(response.status_code, 401)
 
     def test_bad_certificate(self):
         """Get BoB auth token with bad certificate"""
-        response = self.env.get_auth_response(api='authentication', cert=(BAD_CERT,None))
+        response = self.env.get_auth_response(api='authentication', cert=(BAD_CERT, None))
         self.assertEqual(response.status_code, 401)
 
 

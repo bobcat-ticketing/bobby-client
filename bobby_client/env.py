@@ -1,7 +1,6 @@
 """BoB Test Environment"""
 
 import os
-import json
 import uuid
 import logging
 from typing import Dict, Tuple
@@ -16,7 +15,6 @@ DEFAULT_MAX_TTL = 3600
 
 class DebugSession(requests.Session):
 
-
     def send(self, *args, **kwargs):
         """Send request, log request and response"""
 
@@ -26,7 +24,7 @@ class DebugSession(requests.Session):
         logging.debug("REQUEST %s URL: %s", tag, request.url)
         logging.debug("REQUEST %s HEADERS: %s", tag, request.headers)
         logging.debug("REQUEST %s CERT: %s", tag, kwargs.get('cert'))
-        
+
         proxies = kwargs.get('proxies')
         if proxies is not None:
             logging.debug("REQUEST %s PROXIES: %s", tag, proxies)

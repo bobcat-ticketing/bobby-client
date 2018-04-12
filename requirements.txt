@@ -1,6 +1,6 @@
 green
 mypy
 pyjwkest
-pylint
+pylama
 requests
 ruamel.yaml

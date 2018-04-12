@@ -1,6 +1,8 @@
 """Test BoB Ticket API"""
 
+import logging
 import unittest
+from bobby_client.env import TestEnvironment
 
 
 class TestTicketAPI(unittest.TestCase):

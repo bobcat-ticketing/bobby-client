@@ -7,7 +7,7 @@ from bobby_client.env import TestEnvironment
 
 
 PRODUCT_FILTER = {
-    'group': {'groupType':'zone', 'groupIds': ['820', '821', '822']},
+    'group': {'groupType': 'zone', 'groupIds': ['820', '821', '822']},
     'travellerCategoryIds': ['a']
 }
 

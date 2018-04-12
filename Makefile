@@ -8,9 +8,6 @@ BAD_CERT=	badcert.pem
 
 all:
 
-lint: $(VENV)
-	$(VENV)/bin/pylint $(SOURCE)
-
 $(VENV): requirements.txt
 	$(PYTHON) -m venv $(VENV)
 	$(VENV)/bin/pip install -r requirements.txt
@@ -46,6 +43,9 @@ test-inspection:
 
 test-lifecycle:
 	$(GREEN) $(SOURCE)/test_lifecycle*.py
+
+lint: $(VENV)
+	$(VENV)/bin/pylama $(SOURCE)
 
 typecheck: $(VENV)
 	$(VENV)/bin/mypy --ignore-missing-imports $(SOURCE)

@@ -3,7 +3,6 @@
 import unittest
 import logging
 import os
-from datetime import datetime, timezone
 from jwkest import b64e
 from bobby_client.env import TestEnvironment
 
