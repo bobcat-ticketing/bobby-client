@@ -1,6 +1,6 @@
+cryptojwt
 green
 mypy
-pyjwkest
 pylama
 requests
 ruamel.yaml

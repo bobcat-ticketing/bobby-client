@@ -3,7 +3,7 @@
 import unittest
 import logging
 import os
-from jwkest import b64e
+from cryptojwt import b64e
 from bobby_client.env import TestEnvironment
 
 
