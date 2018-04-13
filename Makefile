@@ -11,6 +11,7 @@ all:
 $(VENV): requirements.txt
 	$(PYTHON) -m venv $(VENV)
 	$(VENV)/bin/pip install -r requirements.txt
+	touch $(VENV)
 
 upgrade-venv:: $(VENV)
 	$(VENV)/bin/pip install -r requirements.txt --upgrade
@@ -48,7 +49,7 @@ lint: $(VENV)
 	$(VENV)/bin/pylama $(SOURCE)
 
 typecheck: $(VENV)
-	$(VENV)/bin/mypy --ignore-missing-imports $(SOURCE)
+	$(VENV)/bin/mypy $(SOURCE)
 
 clean:
 	rm -f $(BAD_CERT)
