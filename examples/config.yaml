@@ -17,7 +17,7 @@ http:
 
 macros:
   # known good ticket ID (for validation/inspection testing)
-  TICKET_ID: 58221f2f13fc33000713b79c
+  TICKET_ID: 599d67d74439850008ae3ff5
 
 test:
   authentication:
