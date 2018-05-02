@@ -50,7 +50,7 @@ class TestValidationAPIwithEvents(unittest.TestCase):
             del event['test_description']
             report.append(self.env.update_dict_macros(event))
         response = self.session.post(request_uri, json=report)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_bad_events(self):
         """Test bad ticket event submission"""
