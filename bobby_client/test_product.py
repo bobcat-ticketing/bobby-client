@@ -49,6 +49,7 @@ class TestProductAPI(unittest.TestCase):
             manifest_request = {
                 'productSelections': product_selections
             }
+            logging.info("Requesting product using: %s", manifest_request)
             request_uri = '{}/manifest'.format(self.env.endpoint('product'))
             response = self.session.post(request_uri, json=manifest_request)
             self.assertEqual(response.status_code, 201)
