@@ -1,12 +1,5 @@
 [
 	{
-		"selection": [
-			{
-				"productId": "school180"
-			}
-		]
-	},
-	{
 		"filter": {
 			"group": {
 				"groupType": "zone",
