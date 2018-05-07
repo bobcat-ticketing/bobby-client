@@ -25,6 +25,9 @@ class TestProductAPIwithFilters(unittest.TestCase):
         """Test product filter using payload or query parameters"""
 
         for test_case in self.filters[filter_type]:
+
+            logging.info("Running test %s", test_case.get('id'))
+
             request_uri = '{}/product'.format(self.env.endpoint('product'))
 
             if test_case['operation'] == 'get':

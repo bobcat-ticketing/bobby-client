@@ -36,6 +36,7 @@ class TestProductAPI(unittest.TestCase):
         """Test manifest search"""
 
         for selector in self.manifests:
+            logging.info("Running test %s", selector.get('id'))
             if 'filter' in selector:
                 logging.info("Get manifest via product filter")
                 product_id = self._find_first_product(selector['filter'])
