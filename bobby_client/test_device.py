@@ -3,7 +3,7 @@
 import unittest
 import logging
 import uuid
-from cryptojwt import b64e
+from cryptojwt.utils import b64e
 from bobby_client.env import TestEnvironment
 
 
