@@ -8,13 +8,16 @@ BAD_CERT=	badcert.pem
 
 all:
 
-$(VENV): requirements.txt
+$(VENV): $(VENV)/.depend
+
+$(VENV)/.depend: requirements.txt
 	$(PYTHON) -m venv $(VENV)
 	$(VENV)/bin/pip install -r requirements.txt
-	touch $(VENV)
+	touch $(VENV)/.depend
 
-upgrade-venv:: $(VENV)
+upgrade-venv::
 	$(VENV)/bin/pip install -r requirements.txt --upgrade
+	touch $(VENV)/.depend
 
 $(BAD_CERT):
 	openssl req -new -x509 -sha256 -days 1000 \
