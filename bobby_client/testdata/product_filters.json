@@ -1,6 +1,7 @@
 {
 	"group": [
 		{
+			"id": "79631666-1A16-4B7A-A20D-EF3441DB2EB7",
 			"operation": "post",
 			"payload": {
 				"group": {
@@ -21,6 +22,7 @@
 			]
 		},
 		{
+			"id": "62431750-807C-46A8-B179-6B8FF1149B5F",
 			"operation": "post",
 			"payload": {
 				"group": {
@@ -42,6 +44,7 @@
 			]
 		},
 		{
+			"id": "45A40484-D93B-4C45-9CCC-330E5DA58FCF",
 			"operation": "post",
 			"payload": {
 				"group": {
@@ -65,6 +68,7 @@
 			]
 		},
 		{
+			"id": "B61BC9E9-95A6-4910-9161-9D0622DCF2CA",
 			"operation": "post",
 			"payload": {
 				"group": {
@@ -80,6 +84,7 @@
 			"code": 404
 		},
 		{
+			"id": "93EF05DE-A27A-4C3F-A174-DF35148277F8",
 			"operation": "post",
 			"payload": {
 				"group": {
@@ -99,6 +104,7 @@
 	],
 	"query": [
 		{
+			"id": "8A2F806F-845F-407F-A867-CC93F0D047FE",
 			"operation": "get",
 			"query": {
 				"originLocation": "7411233",
@@ -112,6 +118,7 @@
 			]
 		},
 		{
+			"id": "1D9CB54D-00E6-4B5F-BF8F-D7D32A2B3F7F",
 			"operation": "get",
 			"query": {
 				"originLocation": "7411233",
@@ -127,6 +134,7 @@
 			]
 		},
 		{
+			"id": "B3A59EB2-9D6F-43C0-9D24-104E4D754780",
 			"operation": "get",
 			"query": {
 				"originLocation": "7422840",
@@ -144,6 +152,7 @@
 			]
 		},
 		{
+			"id": "21EEE052-5AF6-4C69-8AC5-6B0E3318EA01",
 			"operation": "get",
 			"query": {
 				"originLocation": "999999",
@@ -157,6 +166,7 @@
 	],
 	"route": [
 		{
+			"id": "9D5A8196-BE11-4B53-8C4D-A32B22422E4C",
 			"operation": "post",
 			"payload": {
 				"route": [
@@ -189,6 +199,7 @@
 			]
 		},
 		{
+			"id": "C8669C5D-FCA3-4885-B6F2-C3F88F2073B9",
 			"operation": "post",
 			"payload": {
 				"route": [
@@ -216,6 +227,7 @@
 			]
 		},
 		{
+			"id": "AD123EF2-D86B-4E1C-80BC-14D25107CE38",
 			"operation": "post",
 			"payload": {
 				"route": [

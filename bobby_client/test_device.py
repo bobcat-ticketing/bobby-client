@@ -2,10 +2,8 @@
 
 import unittest
 import logging
-import json
 import uuid
-import requests
-from jwkest import b64e
+from cryptojwt.utils import b64e
 from bobby_client.env import TestEnvironment
 
 

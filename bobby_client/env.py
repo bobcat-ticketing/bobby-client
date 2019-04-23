@@ -1,10 +1,9 @@
 """BoB Test Environment"""
 
 import os
-import json
 import uuid
 import logging
-from typing import Dict, Tuple
+from typing import Dict, Tuple, Optional
 from datetime import datetime, timezone
 from ruamel import yaml
 import requests
@@ -12,10 +11,9 @@ import requests
 
 DEFAULT_CONF = "./config.yaml"
 DEFAULT_MAX_TTL = 3600
-
+CERT = Tuple[Optional[str], Optional[str]]
 
 class DebugSession(requests.Session):
-
 
     def send(self, *args, **kwargs):
         """Send request, log request and response"""
@@ -26,7 +24,7 @@ class DebugSession(requests.Session):
         logging.debug("REQUEST %s URL: %s", tag, request.url)
         logging.debug("REQUEST %s HEADERS: %s", tag, request.headers)
         logging.debug("REQUEST %s CERT: %s", tag, kwargs.get('cert'))
-        
+
         proxies = kwargs.get('proxies')
         if proxies is not None:
             logging.debug("REQUEST %s PROXIES: %s", tag, proxies)
@@ -48,9 +46,9 @@ class TestEnvironment(object):
         self.config = config
         self.base_dir = base_dir
         self.logger = logging.getLogger(__name__)
-        self.macros = self.config.get('macros', {})
+        self.macros: Dict[str, str] = self.config.get('macros', {})
         self.httpconfig = self.config.get('http')
-        self.authconfig = self.config.get('global')
+        self.authconfig: Dict[str, str] = self.config.get('global', {})
         self.entity_id = self.authconfig.get('entity_id')
         self.cert_filename = self.get_filepath(self.authconfig.get('cert'))
         self.key_filename = self.get_filepath(self.authconfig.get('key'))
@@ -61,9 +59,9 @@ class TestEnvironment(object):
 
     def endpoint(self, api: str) -> str:
         """Get endpoint by API"""
-        return self.config['test'][api]['endpoint']
+        return str(self.config['test'][api]['endpoint'])
 
-    def authenticate(self, session: requests.Session, api: str = None) -> None:
+    def authenticate(self, session: requests.Session, api: Optional[str] = None) -> None:
         """Add BoB authentication to session (use static token if configured)"""
         token = self.authconfig.get('token')
         if token is not None:
@@ -83,9 +81,9 @@ class TestEnvironment(object):
         return session
 
     def get_auth_response(self,
-                          api: str = None,
-                          entity_id: str = None,
-                          cert: Tuple[str, str] = None) -> requests.Response:
+                          api: Optional[str] = None,
+                          entity_id: Optional[str] = None,
+                          cert: Optional[CERT] = None) -> requests.Response:
         """Get authentication response"""
         if api is not None:
             if 'entity_id' in self.config['test'][api]:
@@ -106,15 +104,15 @@ class TestEnvironment(object):
             response = session.get(url=request_uri, cert=cert, verify=verify, proxies=proxies)
         return response
 
-    def get_auth_jwt_compact(self, api: str = None) -> str:
+    def get_auth_jwt_compact(self, api: Optional[str] = None) -> str:
         """Get authentication JWT compact"""
         response = self.get_auth_response(api=api)
         if response.status_code != 200:
             response.raise_for_status()
         data = response.json()
-        return data['jwtCompact']
+        return str(data['jwtCompact'])
 
-    def get_filepath(self, filename: str = None) -> str:
+    def get_filepath(self, filename: Optional[str] = None) -> Optional[str]:
         """Get absolute file path"""
         if filename is not None:
             return self.base_dir + '/' + filename
@@ -134,7 +132,7 @@ class TestEnvironment(object):
         return data
 
     @classmethod
-    def create_from_config_file(cls, filename: str = DEFAULT_CONF):
+    def create_from_config_file(cls, filename: str = DEFAULT_CONF) -> object:
         """Load configuration as YAML"""
         logging.debug("Reading configuration from %s", filename)
         with open(filename, "rt") as file:

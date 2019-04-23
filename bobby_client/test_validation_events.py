@@ -3,7 +3,7 @@
 import unittest
 import logging
 import json
-from typing import Dict, List
+from typing import Dict
 from bobby_client.env import TestEnvironment
 
 
@@ -33,7 +33,7 @@ class TestValidationAPIwithEvents(unittest.TestCase):
         with open(filename) as events_file:
             events = json.load(events_file)
         for event in events:
-            if not 'eventType' in event:
+            if 'eventType' not in event:
                 event['eventType'] = 'validation'
             self._submit_event(self.env.update_dict_macros(event), request_uri, 201)
 
@@ -45,12 +45,12 @@ class TestValidationAPIwithEvents(unittest.TestCase):
             events = json.load(events_file)
         report = []
         for event in events:
-            if not 'eventType' in event:
+            if 'eventType' not in event:
                 event['eventType'] = 'validation'
             del event['test_description']
             report.append(self.env.update_dict_macros(event))
         response = self.session.post(request_uri, json=report)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_bad_events(self):
         """Test bad ticket event submission"""
@@ -59,7 +59,7 @@ class TestValidationAPIwithEvents(unittest.TestCase):
         with open(filename) as events_file:
             events = json.load(events_file)
         for event in events:
-            if not 'eventType' in event:
+            if 'eventType' not in event:
                 event['eventType'] = 'validation'
             self._submit_event(self.env.update_dict_macros(event), request_uri, 400)
 

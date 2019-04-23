@@ -8,15 +8,16 @@ BAD_CERT=	badcert.pem
 
 all:
 
-lint: $(VENV)
-	$(VENV)/bin/pylint $(SOURCE)
+$(VENV): $(VENV)/.depend
 
-$(VENV): requirements.txt
+$(VENV)/.depend: requirements.txt
 	$(PYTHON) -m venv $(VENV)
 	$(VENV)/bin/pip install -r requirements.txt
+	touch $(VENV)/.depend
 
-upgrade-venv:: $(VENV)
+upgrade-venv::
 	$(VENV)/bin/pip install -r requirements.txt --upgrade
+	touch $(VENV)/.depend
 
 $(BAD_CERT):
 	openssl req -new -x509 -sha256 -days 1000 \
@@ -47,8 +48,11 @@ test-inspection:
 test-lifecycle:
 	$(GREEN) $(SOURCE)/test_lifecycle*.py
 
+lint: $(VENV)
+	$(VENV)/bin/pylama $(SOURCE)
+
 typecheck: $(VENV)
-	$(VENV)/bin/mypy --ignore-missing-imports $(SOURCE)
+	$(VENV)/bin/mypy $(SOURCE)
 
 clean:
 	rm -f $(BAD_CERT)

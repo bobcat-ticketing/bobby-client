@@ -3,20 +3,36 @@
 import unittest
 import logging
 import os
-from datetime import datetime, timezone
-from jwkest import b64e
+from cryptojwt.utils import b64e
 from bobby_client.env import TestEnvironment
 
 
-ISSUER_SIGNATURE = b64e(os.urandom(32)).decode()
+ISSUER_SIGNATURE_FAST = b64e(os.urandom(32)).decode()
+ISSUER_SIGNATURE_SLOW = b64e(os.urandom(32)).decode()
 
 # Lillies väg 2, Lerum
-EVENT_START = {
+EVENT_START_FAST  = {
     "eventType": "validation",
     "ticketId": "TICKET_ID",
     "mtbReference": {
         "pid": 1,
-        "issuerSignature": ISSUER_SIGNATURE
+        "issuerSignature": ISSUER_SIGNATURE_FAST
+    },
+    'time': '20170521T200000Z',
+    'modeOfTransport': 'bus',
+    'geo': {
+        'lat': 57.770351,
+        'long': 12.255959
+    }
+}
+
+# Lillies väg 2, Lerum
+EVENT_START_SLOW = {
+    "eventType": "validation",
+    "ticketId": "TICKET_ID",
+    "mtbReference": {
+        "pid": 1,
+        "issuerSignature": ISSUER_SIGNATURE_SLOW
     },
     'time': '20170521T200000Z',
     'modeOfTransport': 'bus',
@@ -32,7 +48,7 @@ EVENT_FAST = {
     "ticketId": "TICKET_ID",
     "mtbReference": {
         "pid": 1,
-        "issuerSignature": ISSUER_SIGNATURE
+        "issuerSignature": ISSUER_SIGNATURE_FAST
     },
     'time': '20170521T201000Z',
     'modeOfTransport': 'bus',
@@ -48,7 +64,7 @@ EVENT_SLOW = {
     "ticketId": "TICKET_ID",
     "mtbReference": {
         "pid": 1,
-        "issuerSignature": ISSUER_SIGNATURE
+        "issuerSignature": ISSUER_SIGNATURE_SLOW
     },
     'time': '20170521T200500Z',
     'modeOfTransport': 'bus',
@@ -76,7 +92,7 @@ class TestValidationFraudcheckAPI(unittest.TestCase):
 
         # create base event
         request_uri = '{}/validation'.format(self.env.endpoint('validation'))
-        event = self.env.update_dict_macros(EVENT_START)
+        event = self.env.update_dict_macros(EVENT_START_FAST)
         response = self.session.post("{}/{}".format(request_uri, event['ticketId']), json=event)
         self.assertEqual(response.status_code, 201)
 
@@ -98,7 +114,7 @@ class TestValidationFraudcheckAPI(unittest.TestCase):
 
         # create base event
         request_uri = '{}/validation'.format(self.env.endpoint('validation'))
-        event = self.env.update_dict_macros(EVENT_START)
+        event = self.env.update_dict_macros(EVENT_START_SLOW)
         response = self.session.post("{}/{}".format(request_uri, event['ticketId']), json=event)
         self.assertEqual(response.status_code, 201)
 

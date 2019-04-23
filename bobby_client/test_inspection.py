@@ -1,6 +1,8 @@
 """Test BoB Inspection API"""
 
+import logging
 import unittest
+from bobby_client.env import TestEnvironment
 
 
 class TestInspectionAPI(unittest.TestCase):
