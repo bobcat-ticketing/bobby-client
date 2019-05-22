@@ -1,5 +1,24 @@
+"""b64 utils from cryptojwt"""
+
 import base64
 import re
+
+
+_b64_re = re.compile(b"^[A-Za-z0-9_-]*$")
+
+
+def add_padding(b):
+    # add padding chars
+    m = len(b) % 4
+    if m == 1:
+        # NOTE: for some reason b64decode raises *TypeError* if the
+        # padding is incorrect.
+        raise BadSyntax(b, "incorrect padding")
+    elif m == 2:
+        b += b"=="
+    elif m == 3:
+        b += b"="
+    return b
 
 
 def b64e(b):
