@@ -46,3 +46,17 @@ test:
     good_events: "bobby_client/testdata/ticket_events_good.json"
     # list of known bad events to submit
     bad_events: "bobby_client/testdata/ticket_events_bad.json"
+  token:
+    endpoint: https://bobby.samtrafiken.se/api/v1
+    known_serials:
+      - pid: 16
+        serial: 1
+      - pid: 16
+        serial: 2
+    unknown_serials:
+      - pid: 16
+        serial: 1337
+      - pid: 1
+        serial: 1
+    known_ids:
+      - j9OopF-HSIp5cfGpcPpYSY0-s_nh90wWU_EwZTnoq9E
