@@ -1,4 +1,3 @@
-cryptojwt==0.7.1
 green
 mypy
 pylama

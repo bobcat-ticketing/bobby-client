@@ -5,7 +5,7 @@ import logging
 import uuid
 import json
 import time
-from cryptojwt.utils import b64d
+from bobby_client.utils import b64d
 from bobby_client.env import TestEnvironment
 
 
