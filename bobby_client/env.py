@@ -132,8 +132,10 @@ class TestEnvironment(object):
         return data
 
     @classmethod
-    def create_from_config_file(cls, filename: str = DEFAULT_CONF) -> object:
+    def create_from_config_file(cls, filename: Optional[str] = None) -> object:
         """Load configuration as YAML"""
+        filename = filename if filename is not None else os.environ.get('BOBBY_CONFIG')
+        filename = filename if filename is not None else DEFAULT_CONF
         logging.debug("Reading configuration from %s", filename)
         with open(filename, "rt") as file:
             config_dict = yaml.load(file, Loader=yaml.Loader)

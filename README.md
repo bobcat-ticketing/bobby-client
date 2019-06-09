@@ -24,6 +24,8 @@ To run the full test suite using [green](https://github.com/CleanCut/green), use
 
     make test
 
+The configuration is read from `config.yaml` or from the file set via the environment variable `BOBBY_CONFIG`.
+
 It is also possible run test suites for individual APIs:
 
     make test-authentication
