@@ -9,7 +9,7 @@ class TestTicketAPI(unittest.TestCase):
 
     def setUp(self):
         logging.basicConfig(level=logging.DEBUG)
-        self.env = TestEnvironment.create_from_config_file()
+        self.env = TestEnvironment.create_from_config_file(api='ticket')
 
     def tearDown(self):
         self.env.close()

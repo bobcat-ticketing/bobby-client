@@ -11,7 +11,7 @@ class TestValidationAPIwithEvents(unittest.TestCase):
 
     def setUp(self):
         logging.basicConfig(level=logging.DEBUG)
-        self.env = TestEnvironment.create_from_config_file()
+        self.env = TestEnvironment.create_from_config_file(api='validation')
         self.session = self.env.get_session()
         self.env.authenticate(self.session, api='validation')
 

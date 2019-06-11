@@ -10,7 +10,7 @@ class TestProductAPIwithFilters(unittest.TestCase):
 
     def setUp(self):
         logging.basicConfig(level=logging.DEBUG)
-        self.env = TestEnvironment.create_from_config_file()
+        self.env = TestEnvironment.create_from_config_file(api='product')
         self.session = self.env.get_session()
         filename = self.env.config['test']['product']['filters']
         with open(filename) as filters_file:
