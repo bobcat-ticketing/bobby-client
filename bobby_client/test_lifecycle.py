@@ -16,11 +16,12 @@ class TestTicketLifecycle(unittest.TestCase):
 
     def setUp(self):
         logging.basicConfig(level=logging.DEBUG)
-        self.env = TestEnvironment.create_from_config_file()
+        self.env = TestEnvironment.create_from_config_file(api=['validation', 'product', 'ticket'])
         self.session_pos = self.env.get_session()
         self.session_val = self.env.get_session()
-        self.env.authenticate(self.session_pos, api='product')
         self.env.authenticate(self.session_val, api='validation')
+        self.env.authenticate(self.session_pos, api='product')
+        self.env.authenticate(self.session_pos, api='ticket')
 
     def tearDown(self):
         self.session_pos.close()

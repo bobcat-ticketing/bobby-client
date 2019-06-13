@@ -3,7 +3,8 @@
 import os
 import uuid
 import logging
-from typing import Dict, Tuple, Optional
+import unittest
+from typing import Dict, Tuple, Optional, List
 from datetime import datetime, timezone
 from ruamel import yaml
 import requests
@@ -132,7 +133,7 @@ class TestEnvironment(object):
         return data
 
     @classmethod
-    def create_from_config_file(cls, filename: Optional[str] = None, api: Optional[str] = None) -> object:
+    def create_from_config_file(cls, filename: Optional[str] = None, api: List[str] = []) -> object:
         """Load configuration as YAML"""
         filename = filename if filename is not None else os.environ.get('BOBBY_CONFIG')
         filename = filename if filename is not None else DEFAULT_CONF
@@ -140,6 +141,9 @@ class TestEnvironment(object):
         with open(filename, "rt") as file:
             config_dict = yaml.load(file, Loader=yaml.Loader)
         base_dir = os.path.dirname(filename)
-        if api is not None and api not in config_dict.get('test', {}):
-            raise Exception(f"API {api} not configured in {filename}")
+        if isinstance(api, str):
+            api = [api]
+        for x in api:
+            if x not in config_dict.get('test', {}):
+                raise unittest.SkipTest(f"API {api} not configured in {filename}")
         return cls(config_dict, base_dir)
