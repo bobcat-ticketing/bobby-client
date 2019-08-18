@@ -19,7 +19,7 @@ class TestValidationAPI(unittest.TestCase):
 
     def test_get_blacklist(self):
         """Test get blacklist"""
-        request_uri = '{}/blacklist?blacklistEntryId=0'.format(self.env.endpoint('device'))
+        request_uri = '{}/blacklist?blacklistEntryId=0'.format(self.env.endpoint('validation'))
         response = self.session.get(request_uri)
         self.assertEqual(response.status_code, 200)
 
