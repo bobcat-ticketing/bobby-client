@@ -14,6 +14,10 @@ class TestValidationAPIwithEvents(unittest.TestCase):
         self.env = TestEnvironment.create_from_config_file(api='validation')
         self.session = self.env.get_session()
         self.env.authenticate(self.session, api='validation')
+        if 'good_events' not in self.env.config['test']['validation']:
+            raise unittest.SkipTest("No good_events configured")
+        if 'bad_events' not in self.env.config['test']['validation']:
+            raise unittest.SkipTest("No bad_events configured")
 
     def tearDown(self):
         self.session.close()
