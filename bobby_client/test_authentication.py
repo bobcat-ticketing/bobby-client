@@ -1,13 +1,13 @@
 """Test BoB Authentication API"""
 
-import unittest
-import logging
-import uuid
 import json
+import logging
 import time
-from bobby_client.utils import b64d
-from bobby_client.env import TestEnvironment
+import unittest
+import uuid
 
+from bobby_client.env import TestEnvironment
+from bobby_client.utils import b64d
 
 BAD_ENTITY_ID = str(uuid.uuid4())
 BAD_CERT = 'badcert.pem'

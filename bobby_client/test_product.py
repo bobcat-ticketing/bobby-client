@@ -1,8 +1,9 @@
 """Test BoB Product API"""
 
-import unittest
-import logging
 import json
+import logging
+import unittest
+
 from bobby_client.env import TestEnvironment
 
 

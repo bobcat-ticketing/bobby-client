@@ -1,10 +1,11 @@
 """Test BoB Device API"""
 
-import unittest
 import logging
+import unittest
 import uuid
-from bobby_client.utils import b64e
+
 from bobby_client.env import TestEnvironment
+from bobby_client.utils import b64e
 
 
 class TestDeviceAPI(unittest.TestCase):

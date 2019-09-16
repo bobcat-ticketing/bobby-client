@@ -3,7 +3,6 @@
 import base64
 import re
 
-
 _b64_re = re.compile(b"^[A-Za-z0-9_-]*$")
 
 

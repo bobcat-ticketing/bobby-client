@@ -1,11 +1,11 @@
 """Test BoB Validation API"""
 
-import unittest
 import logging
 import os
-from bobby_client.utils import b64e
-from bobby_client.env import TestEnvironment
+import unittest
 
+from bobby_client.env import TestEnvironment
+from bobby_client.utils import b64e
 
 ISSUER_SIGNATURE_FAST = b64e(os.urandom(32)).decode()
 ISSUER_SIGNATURE_SLOW = b64e(os.urandom(32)).decode()

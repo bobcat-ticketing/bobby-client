@@ -1,7 +1,8 @@
 """Test BoB Validation API"""
 
-import unittest
 import logging
+import unittest
+
 from bobby_client.env import TestEnvironment
 
 

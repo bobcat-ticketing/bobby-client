@@ -1,9 +1,10 @@
 """Test BoB Token API"""
 
-import unittest
 import logging
 import os
+import unittest
 from datetime import datetime, timezone
+
 import dateutil.parser
 
 from bobby_client.env import TestEnvironment

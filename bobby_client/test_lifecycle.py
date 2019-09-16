@@ -1,10 +1,10 @@
 """Test BoB Lifecycle API"""
 
-import unittest
 import logging
+import unittest
 from datetime import datetime, timezone
-from bobby_client.env import TestEnvironment
 
+from bobby_client.env import TestEnvironment
 
 PRODUCT_FILTER = {
     'group': {'groupType': 'zone', 'groupIds': ['820', '821', '822']},
