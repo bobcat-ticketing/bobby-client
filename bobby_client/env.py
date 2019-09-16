@@ -1,14 +1,15 @@
 """BoB Test Environment"""
 
-import os
-import uuid
 import logging
+import logging.config
+import os
 import unittest
-from typing import Dict, Tuple, Optional, List
+import uuid
 from datetime import datetime, timezone
-from ruamel import yaml
-import requests
+from typing import Dict, List, Optional, Tuple
 
+import requests
+from ruamel import yaml
 
 DEFAULT_CONF = "./config.yaml"
 DEFAULT_MAX_TTL = 3600
@@ -53,6 +54,12 @@ class TestEnvironment(object):
         self.entity_id = self.authconfig.get('entity_id')
         self.cert_filename = self.get_filepath(self.authconfig.get('cert'))
         self.key_filename = self.get_filepath(self.authconfig.get('key'))
+        config_dict = config.get('logging')
+        if config_dict is not None:
+            logging.config.dictConfig(config_dict)
+        else:
+            logging.basicConfig(level=logging.INFO)
+
 
     def close(self) -> None:
         """Close test environment"""
@@ -111,7 +118,10 @@ class TestEnvironment(object):
         if response.status_code != 200:
             response.raise_for_status()
         data = response.json()
-        return str(data['jwtCompact'])
+        jwt = data['jwtCompact']
+        logging.info("Got BoB authtoken payload: %s", data['payload'])
+        logging.debug("Got BoB authtoken JWT: %s", jwt)
+        return str(jwt)
 
     def get_filepath(self, filename: Optional[str] = None) -> Optional[str]:
         """Get absolute file path"""
