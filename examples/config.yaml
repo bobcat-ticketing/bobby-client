@@ -15,6 +15,13 @@ http:
   #proxies:
   #  https: http://127.0.0.1:3128/
 
+# https://www.python.org/dev/peps/pep-0391/
+logging:
+  version: 1
+  disable_existing_loggers: false
+  root:
+    level: INFO
+
 macros:
   # known good ticket ID (for validation/inspection testing)
   TICKET_ID: 599d67d74439850008ae3ff5
