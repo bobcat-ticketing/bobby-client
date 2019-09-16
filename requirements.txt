@@ -1,5 +1,6 @@
 green
 mypy
 pylama
+python-dateutil
 requests
 ruamel.yaml
