@@ -37,7 +37,8 @@ class TestTokenAPI(unittest.TestCase):
         request_uri = '{}/token'.format(self.env.endpoint('token'))
         for params in self.env.config['test']['token'].get('unknown_serials', []):
             response = self.session.get(request_uri, params=params)
-            self.assertEqual(response.status_code, 404)
+            self.assertEqual(response.status_code, 200)
+            self.assertTrue(len(response.json()) == 0)
 
     def test_get_by_id(self):
         """Get token by id"""
