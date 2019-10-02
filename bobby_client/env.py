@@ -86,6 +86,7 @@ class TestEnvironment(object):
         if self.httpconfig is not None:
             session.verify = self.httpconfig.get('verify', True)
             session.proxies = self.httpconfig.get('proxies')
+            session.headers = self.httpconfig.get('headers', {})
         return session
 
     def get_auth_response(self,
