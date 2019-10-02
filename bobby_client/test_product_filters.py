@@ -13,9 +13,12 @@ class TestProductAPIwithFilters(unittest.TestCase):
         logging.basicConfig(level=logging.DEBUG)
         self.env = TestEnvironment.create_from_config_file(api='product')
         self.session = self.env.get_session()
-        filename = self.env.config['test']['product']['filters']
-        with open(filename) as filters_file:
-            self.filters = json.load(filters_file)
+        filename = self.env.config['test']['product'].get('filters')
+        if filename is not None:
+            with open(filename) as filters_file:
+                self.filters = json.load(filters_file)
+        else:
+            self.filters = {}
         self.env.authenticate(self.session, api='product')
 
     def tearDown(self):
@@ -25,7 +28,7 @@ class TestProductAPIwithFilters(unittest.TestCase):
     def _base_test_product(self, filter_type: str):
         """Test product filter using payload or query parameters"""
 
-        for test_case in self.filters[filter_type]:
+        for test_case in self.filters.get(filter_type, []):
 
             logging.info("Running test %s", test_case.get('id'))
 

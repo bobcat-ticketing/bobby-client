@@ -13,9 +13,12 @@ class TestProductAPI(unittest.TestCase):
         logging.basicConfig(level=logging.DEBUG)
         self.env = TestEnvironment.create_from_config_file(api='product')
         self.session = self.env.get_session()
-        filename = self.env.config['test']['product']['manifests']
-        with open(filename) as manifests_file:
-            self.manifests = json.load(manifests_file)
+        filename = self.env.config['test']['product'].get('manifests')
+        if filename is not None:
+            with open(filename) as manifests_file:
+                self.manifests = json.load(manifests_file)
+        else:
+            self.manifests = []
         self.env.authenticate(self.session, api='product')
 
     def tearDown(self):
