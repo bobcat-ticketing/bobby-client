@@ -28,7 +28,12 @@ class TestProductAPIwithFilters(unittest.TestCase):
     def _base_test_product(self, filter_type: str):
         """Test product filter using payload or query parameters"""
 
-        for test_case in self.filters.get(filter_type, []):
+        test_cases = self.filters.get(filter_type, [])
+
+        if len(test_cases) == 0:
+            self.skipTest(f"No filters defined for filter type {filter_type}")
+
+        for test_case in test_cases:
 
             logging.info("Running test %s", test_case.get('id'))
 
