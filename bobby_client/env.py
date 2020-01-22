@@ -25,6 +25,7 @@ class DebugSession(requests.Session):
         logging.debug("REQUEST %s METHOD: %s", tag, request.method)
         logging.debug("REQUEST %s URL: %s", tag, request.url)
         logging.debug("REQUEST %s HEADERS: %s", tag, request.headers)
+        logging.debug("REQUEST %s CONTENT: %s", tag, request.body)
         logging.debug("REQUEST %s CERT: %s", tag, kwargs.get('cert'))
 
         proxies = kwargs.get('proxies')
