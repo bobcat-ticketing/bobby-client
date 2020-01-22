@@ -4,6 +4,7 @@ import json
 import logging
 import unittest
 
+from bobby_client.utils import b64d
 from bobby_client.env import TestEnvironment
 
 
@@ -20,6 +21,7 @@ class TestProductAPI(unittest.TestCase):
         else:
             self.manifests = []
         self.env.authenticate(self.session, api='product')
+        self.save_results = self.env.config['global'].get('save_results', False)
 
     def tearDown(self):
         self.session.close()
@@ -40,7 +42,8 @@ class TestProductAPI(unittest.TestCase):
         """Test manifest search"""
 
         for selector in self.manifests:
-            logging.info("Running test %s", selector.get('id'))
+            test_id = selector.get('id')
+            logging.info("Running test %s", test_id)
             if 'filter' in selector:
                 logging.info("Get manifest via product filter")
                 product_id = self._find_first_product(selector['filter'])
@@ -62,8 +65,20 @@ class TestProductAPI(unittest.TestCase):
             result = response.json()
             self.assertTrue(len(result) > 0)
 
-            # refetch manifest and compare
             manifest = result['manifest']
+
+            if self.save_results:
+                payload_filename = f"{test_id}.json"
+                manifest_filename = f"{test_id}.bin"
+                logging.info("Saving payload to %s", payload_filename)
+                with open(payload_filename, 'wt') as output_file:
+                    json.dump(result, output_file, indent=4)
+                logging.info("Saving manifest to %s", manifest_filename)
+                with open(manifest_filename, 'wb') as output_file:
+                    output_file.write(b64d(manifest.encode()))
+
+            # refetch manifest and compare
+            self.assertTrue('Location' in response.headers)
             manifest_location = response.headers['Location']
             logging.info("Manifest location: %s", manifest_location)
             response = self.session.get(manifest_location)
@@ -72,8 +87,8 @@ class TestProductAPI(unittest.TestCase):
             manifest_refetched = result['manifest']
             self.assertEqual(manifest, manifest_refetched)
 
-    def test_product_categories(self):
-        """Test product categories"""
+    def test_categories(self):
+        """Test categories"""
 
         for category in ['fare', 'product', 'traveller']:
             request_uri = '{}/productcat/{}'.format(self.env.endpoint('product'), category)
@@ -81,6 +96,7 @@ class TestProductAPI(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             result = response.json()
             self.assertTrue(len(result) > 0)
+            logging.info("Found %s category %s", category, result)
 
 
 if __name__ == '__main__':

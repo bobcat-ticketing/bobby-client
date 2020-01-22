@@ -20,6 +20,7 @@ class TestProductAPIwithFilters(unittest.TestCase):
         else:
             self.filters = {}
         self.env.authenticate(self.session, api='product')
+        self.save_results = self.env.config['global'].get('save_results', False)
 
     def tearDown(self):
         self.session.close()
@@ -35,7 +36,9 @@ class TestProductAPIwithFilters(unittest.TestCase):
 
         for test_case in test_cases:
 
-            logging.info("Running test %s", test_case.get('id'))
+            test_id = test_case.get('id')
+
+            logging.info("Running test %s", test_id)
 
             request_uri = '{}/product'.format(self.env.endpoint('product'))
 
@@ -55,6 +58,12 @@ class TestProductAPIwithFilters(unittest.TestCase):
 
             if response.status_code == 200:
                 result = response.json()
+
+                if self.save_results:
+                    payload_filename = f"{test_id}.json"
+                    logging.info("Saving output to %s", payload_filename)
+                    with open(payload_filename, 'wt') as output_file:
+                        json.dump(result, output_file, indent=4)
 
                 if 'amount' in test_case:
                     unexpected = []
